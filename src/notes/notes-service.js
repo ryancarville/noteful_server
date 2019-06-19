@@ -4,15 +4,13 @@ const NotesService = {
 	},
 
 	insertNotes(knex, newNote) {
-		return (
-			knex
-				.into('noteful_notes')
-				.insert(newNote)
-				.returning('*'),
-			then(rows => {
+		return knex
+			.into('noteful_notes')
+			.insert(newNote)
+			.returning('*')
+			.then(rows => {
 				return rows[0];
-			})
-		);
+			});
 	},
 
 	getById(knex, id) {
